@@ -1,0 +1,103 @@
+/* All generic form styling goes here. */
+/* For specific form component styles see the appropriate component stylesheet */
+
+form {
+  margin-bottom: $spacing*2
+}
+
+.field-container {
+  cf();
+  clear: both;
+  padding: $vspacing 0;
+  margin-bottom: ($vspacing/2);
+  +above(m) {
+    .primary & {
+      width: 100%;
+    }
+    width: 50%;
+  }
+}
+
+.field-group {
+  @extend .field-container;
+  +above(m) {
+    width: 100%;
+  }
+  legend {
+    font-size: $mantle;
+    padding: $vspacing 0;
+  }
+}
+
+legend {
+  font-size: $mantle;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  margin-bottom: ($vspacing/2)
+  font-weight: bold;
+}
+
+input, textarea, select {
+  background: #fff;
+  padding: $spacing;
+  width:100%;
+  font-size: $smallCopy
+  &:focus {
+    outline: 0;
+  }
+}
+
+button {
+  button($contact);
+  margin-top: $vspacing
+}
+
+.radio-group {
+  display: inline-block;
+  padding: $vspacing*1.5 $hspacing*2;
+  margin-right: $hspacing;
+  font-weight: normal;
+  input {
+    width: auto;
+    margin-right: $hspacing
+  }
+  &.selected {
+    background: #fff;
+    box-shadow: inset 0 0 0 1px #000;
+  }
+}
+.error {
+  // Don't display errors by default
+  display: none;
+}
+
+.date-input {
+  margin-top: $vspacing;
+  margin-right: $hspacing;
+  display: inline-block;
+  width: $hspacing*5;
+  &:last-of-type {
+    width: $hspacing*8;
+  }
+  span {
+    display: block;
+    margin-bottom: ($vspacing/2);
+  }
+}
+
+.form-summary {
+  > li {
+    > a {
+      font-weight: bold;
+    }
+    > ul > li {
+      margin-left: $hspacing*2
+      > ul > li {
+        margin-left: $hspacing*2
+      }
+    }
+  }
+}
