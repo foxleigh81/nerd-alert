@@ -1,0 +1,14 @@
+language: node_js
+node_js: stable
+before_script:
+- npm install -g gulp
+script: gulp build --prod
+deploy:
+  provider: heroku
+  skip_cleanup: true
+  api_key:
+    secure: gZIzRUIwsJh1au4YRJUM+8at1S6n3/hgGYjaIfbRGXla2YFC9UpOUfRJfg3gEdehkMSrpQv1l+NAlBZ2Zom9r8241EMQeqBDXYkE39qpr0+UQ7K1y/phU/k7b+fgwQXet368d8BHo/mZ3tJL9aziPy0GR+vbvtlsI6vDZ91TKCWVFE+6/FO3/BdWhS5BiEUZNSDpg9GgJMclVKnohLby7Kx22rinSsZQBm3Vyuw+dCc6tgyOjqlbYGEFuOemU+UiV3nIrKAn9qoeh0yPrB2iIlNzeJN/OPMq8EUUtVLYUfdkF94FQzLV3kMXkYGFDth8KOazYPfIg5t4steaG2DlrjJMilBYHR4WbjmBJKDVL8hFhTgXlD2Frh7+KPlfdIgxfsHJjRJLsVBvv8DSm3UgVLsk3/f5tPhUrLDAaxqxAY1Y+kIOQttN58klB4B3My04A4uXqAMeOwHx3WheQSjlhjp9jogt8NSaOTLRtPu/8bDWn9XoTF9WmaV/3IeiAPVu1VrESSWinKhjaNE/y7Cp6qTqO3j4uTMj8oyjq2qJFVAfWJaBLuD3AFZtOLbRLTQEWpa+useiGO5re3RhSTalOLquCNYT99az+T5qn3aIC+qlmt6VNnvAXEZuU+JpPa1lzPrKnZl8IegC0fltU2JJmIlSz0JZ+dmyBRbQI1h17Gg=
+  app:
+    master: nerd-alert
+  on:
+    repo: alexward1981/nerd-alert
