@@ -8,6 +8,7 @@ Any development tasks or optimisations which need to be made should be listed he
 
 ## Tasks:
 1. Set up tests (jasmine and casperjs/spooky)
+2. Establish M2M relationship between comics and users
 
 ## Issues
 No issues at this time
