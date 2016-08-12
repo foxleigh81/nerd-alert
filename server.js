@@ -34,8 +34,18 @@ router.get('/', function(req, res, next) {
   next();
 });
 
+// Load external routes
+var GetComicsRoute = require('./routes/get_comics');
+
 // Register routes
-app.use('/api', router);
+app.use('/api/v1', router);
+app.use('/api/v1', GetComicsRoute);
+
+// As our api has a version prefix, notify the user if the attempt to access the api without versioning
+app.get('/api', function (request, response){
+  'use strict';
+  response.sendFile(path.resolve(__dirname+'/build/release', 'api-notice.html'))
+})
 
 // handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
@@ -48,3 +58,5 @@ app.listen(port, function () {
   'use strict'
   console.log('App is listening on port ' + port);
 });
+
+// Connect to database (postgresql)

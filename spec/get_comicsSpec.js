@@ -1,6 +1,6 @@
-describe('the get_comics() function', function() {
+describe('the process to retreive a comic list', function() {
   'use strict';
-  it('it works on /get_comics/:user_name to return all comics owned by :user_name', function() {
+  it('it works on /api/get_comics/:user_name to return all comics owned by :user_name', function() {
     expect(true).toBe(true);
   });
   it('each comic should have a series name', function() {
