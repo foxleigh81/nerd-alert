@@ -12,8 +12,8 @@ module.exports = ( function () {
       console.log(err);
     }
 
-    router.route('/get_comics')
-    .get(function(req, res) {
+    // Get all comics in the database
+    router.route('/get_comics').get(function(req, res) {
       let results = [];
       // SQL Query > Select Data
       let query = client.query('SELECT c.*, cc.name as condition, p.name as publisher, ct.name as type FROM comics c JOIN publishers p ON (publisher = p.id) JOIN comic_types ct ON (type = ct.id) JOIN comic_condition cc ON (condition = cc.id) ORDER BY c.id ASC;');
@@ -27,6 +27,28 @@ module.exports = ( function () {
         return res.json(results);
       });
     })
+
+  // Get all comics tied to a particular user
+  router.route('/get_comics/:username').get(function(req, res) {
+    let results = [],
+        user = req.params.username;
+
+    // TODO: Query cannot be completed until a M2M relationship is established
+
+    // SQL Query > Select Data
+    let query = client.query('SELECT c.*, cc.name as condition, p.name as publisher, ct.name as type FROM comics c JOIN publishers p ON (publisher = p.id) JOIN comic_types ct ON (type = ct.id) JOIN comic_condition cc ON (condition = cc.id) ORDER BY c.id ASC;');
+
+    // Stream results back one row at a time
+    query.on('row', function(row) {
+      results.push(row);
+    });
+    // After all data is returned, close connection and return results
+    query.on('end', function() {
+      done();
+      return res.json(results);
+    });
+  })
   });
+
   return router;
 })();

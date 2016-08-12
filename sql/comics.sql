@@ -10,7 +10,7 @@ CREATE TABLE comics (
     variant VARCHAR (255) NULL,
     key_issue BOOL DEFAULT false,
     condition INTEGER REFERENCES comic_condition(id),
-    price_on_purchase MONEY NULL,
+    price_on_purchase NUMERIC(10,2) NULL,
     contains_issues INTEGER ARRAY,
     PRIMARY KEY(id)
 );
