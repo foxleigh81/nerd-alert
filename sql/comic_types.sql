@@ -1,9 +1,9 @@
 CREATE TABLE comic_types (
-    id INTEGER UNIQUE,
-    name VARCHAR(100),
-    PRIMARY KEY (id)
-); 
+    type_slug VARCHAR(100) UNIQUE,
+    type_name VARCHAR(100),
+    PRIMARY KEY (type_slug)
+);
 
-INSERT INTO comic_types (id, name) VALUES (1, 'Single Issue');
-INSERT INTO comic_types (id, name) VALUES (2, 'Graphic Novel');
-INSERT INTO comic_types (id, name) VALUES (3, 'Compendium');
+INSERT INTO comic_types (type_slug, type_name) VALUES ('single', 'Single Issue');
+INSERT INTO comic_types (type_slug, type_name) VALUES ('graphic_novel', 'Graphic Novel');
+INSERT INTO comic_types (type_slug, type_name) VALUES ('compendium', 'Compendium');

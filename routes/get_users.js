@@ -24,7 +24,13 @@ module.exports = ( function () {
       // After all data is returned, close connection and return results
       query.on('end', function() {
         done();
-        return res.json(results);
+        if (results.length) {
+          return res.json(results);
+        } else {
+          return res.json({
+            message: 'No results found'
+          });
+        }
       });
     })
   });

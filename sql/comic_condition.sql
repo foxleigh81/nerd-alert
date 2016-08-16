@@ -1,11 +1,11 @@
 CREATE TABLE comic_condition (
-    id INTEGER UNIQUE,
-    name VARCHAR(100),
-    PRIMARY KEY (id)
+    condition_slug VARCHAR(100) UNIQUE,
+    condition_name VARCHAR(100),
+    PRIMARY KEY (condition_slug)
 );
 
-INSERT INTO comic_condition (id, name) VALUES (1, 'NEW');
-INSERT INTO comic_condition (id, name) VALUES (2, 'USED - Excellent');
-INSERT INTO comic_condition (id, name) VALUES (3, 'USED - Good');
-INSERT INTO comic_condition (id, name) VALUES (4, 'USED - Fair');
-INSERT INTO comic_condition (id, name) VALUES (5, 'USED - Poor');
+INSERT INTO comic_condition (condition_slug, condition_name) VALUES ('new', 'NEW');
+INSERT INTO comic_condition (condition_slug, condition_name) VALUES ('excellent', 'USED - Excellent');
+INSERT INTO comic_condition (condition_slug, condition_name) VALUES ('good', 'USED - Good');
+INSERT INTO comic_condition (condition_slug, condition_name) VALUES ('fair', 'USED - Fair');
+INSERT INTO comic_condition (condition_slug, condition_name) VALUES ('poor', 'USED - Poor');
