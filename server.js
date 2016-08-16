@@ -36,10 +36,12 @@ router.get('/', function(req, res, next) {
 
 // Load external routes
 var GetComicsRoute = require('./routes/get_comics');
+var GetUsersRoute = require('./routes/get_users');
 
 // Register routes
 app.use('/api/v1', router);
 app.use('/api/v1', GetComicsRoute);
+app.use('/api/v1', GetUsersRoute);
 
 // As our api has a version prefix, notify the user if the attempt to access the api without versioning
 app.get('/api', function (request, response){
