@@ -5,14 +5,14 @@ module.exports = ( function () {
       pg = require('pg'),
       connectionString = require('../connection.js');
 
+  // TODO: Make a query_runner() module
+
   pg.connect(connectionString, function(err, client, done) {
     //handle errors
     if(err) {
       done();
       console.log(err);
     }
-
-    //TODO: Refactor 'end' into a DRY format
 
     // Get all comics in the database
     router.route('/get_comics').get(function(req, res) {
@@ -42,14 +42,16 @@ module.exports = ( function () {
         user = req.params.username;
 
     // SQL Query > Select Data
-    let query = client.query('SELECT c.*, cs.series_name as series, uc.date_added, uc.price_on_purchase, cc.condition_name as condition, uc.signed, uc.comments, p.publisher_name as publisher, ct.type_name as type FROM comics c JOIN user_comics uc ON (c.comic_id = uc.uc_id) JOIN publishers p ON (publisher = p.publisher_slug) JOIN comic_types ct ON (type = ct.type_slug) JOIN comic_series cs ON (series = cs.series_slug) JOIN comic_condition cc ON (uc.condition = cc.condition_slug) WHERE (uc.user_name = \''+ user +'\') ORDER BY c.comic_id ASC;');
+    let query = 'SELECT c.*, cs.series_name as series, uc.date_added, uc.price_on_purchase, cc.condition_name as condition, uc.signed, uc.comments, p.publisher_name as publisher, ct.type_name as type FROM comics c JOIN user_comics uc ON (c.comic_id = uc.uc_id) JOIN publishers p ON (publisher = p.publisher_slug) JOIN comic_types ct ON (type = ct.type_slug) JOIN comic_series cs ON (series = cs.series_slug) JOIN comic_condition cc ON (uc.condition = cc.condition_slug) WHERE uc.user_name = $1 ORDER BY c.comic_id ASC;';
+    
+    let runquery = client.query(query, [ user ]);
 
     // Stream results back one row at a time
-    query.on('row', function(row) {
+    runquery.on('row', function(row) {
       results.push(row);
     });
     // After all data is returned, close connection and return results
-    query.on('end', function() {
+    runquery.on('end', function() {
       done();
       if (results.length) {
         return res.json(results);
